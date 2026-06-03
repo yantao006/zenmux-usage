@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            zenmux-usage.5m.py
+            install.sh
+          generate_release_notes: true
+          body: |
+            ## Install
+
+            ```bash
+            curl -fsSL https://raw.githubusercontent.com/yantao006/zenmux-usage/main/install.sh | bash
+            ```
+
+            Or download `install.sh` and run `bash install.sh`.
+
+            See [README](https://github.com/yantao006/zenmux-usage#readme) for details.
